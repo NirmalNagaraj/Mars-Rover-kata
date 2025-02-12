@@ -8,7 +8,7 @@ There could be multiple rovers on the plateau, no rover could be at the same coo
 ### Input
  ```
 5 5 - Plateau Dimensions
-[ [3,1], [1,2] ] - Obstacles 
+[ [3,1], [1,3] ] - Obstacles 
 2 - Number of Rovers
 [0 1 N ] - Initial Position of Rover 1
 LLFBRB - Commands for Rover 1
