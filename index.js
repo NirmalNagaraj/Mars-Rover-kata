@@ -10,7 +10,7 @@ class Rover{
         if(instruction === 'F' || instruction === 'B'){
             return true
         }
-        
+  
 
     }
     isTurn(instruction){
