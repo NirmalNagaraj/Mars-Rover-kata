@@ -5,7 +5,7 @@ function isValidPosition(position, grid) {
 
 
 function isMove(instructions){
-
+    //return instructions==='F' || instructions==='B';
 }
 function isTurn(instructions){
 

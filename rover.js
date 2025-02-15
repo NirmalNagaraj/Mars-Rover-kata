@@ -8,14 +8,14 @@ class Rover {
     inputParser(roverPos) {
     }
 
-    execute(command) {
-        return this.roverPos;
+    execute(command,grid) {
+        //return this.roverPos;
         for(let instruction of command){
             
-            //             if(this.isMove(instruction)){
-            //                 this.triggerMove(instruction);
+                        // if(this.isMove(instruction)){
+                        //     this.triggerMove(instruction,grid);
             
-            //             }
+                        // }
             //             else if(this.isTurn(instruction)){
             //                 this.triggerTurn(instruction);
             

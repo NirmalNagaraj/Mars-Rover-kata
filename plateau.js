@@ -15,7 +15,7 @@ class Plateau {
         for (let i = 0; i < count; i++) {
             if (isValidPosition(roverPos[i], this.grid)) {
                 const rover = new Rover(roverPos[i]);
-                let updatedPos = rover.execute(commands[i]);
+                let updatedPos = rover.execute(commands[i],this.grid);
                 this.store.push(updatedPos);
             }
         }
