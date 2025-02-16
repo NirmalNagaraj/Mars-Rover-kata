@@ -9,21 +9,20 @@ class Rover {
     }
 
     execute(command) {
-        return this.roverPos;
         for(let instruction of command){
             
-            //             if(this.isMove(instruction)){
-            //                 this.triggerMove(instruction);
+                        if(this.isMove(instruction)){
+                            this.triggerMove(instruction);
             
-            //             }
-            //             else if(this.isTurn(instruction)){
-            //                 this.triggerTurn(instruction);
+                        }
+                        else if(this.isTurn(instruction)){
+                            this.triggerTurn(instruction);
             
-            //             }
-            //             else{
-            //                 console.error("Error");
+                        }
+                        else{
+                            console.error("Error");
                             
-            //             }
+                        }
     }
  }
 }
