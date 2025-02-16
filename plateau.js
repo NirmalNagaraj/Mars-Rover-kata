@@ -9,6 +9,7 @@ class Plateau {
         for (let obstacleCoordinate of obstacles) {
             this.grid[obstacleCoordinate[0]][obstacleCoordinate[1]] = 1;
         }
+        
 
         this.store = [];
 
@@ -16,6 +17,8 @@ class Plateau {
             if (isValidPosition(roverPos[i], this.grid)) {
                 const rover = new Rover(roverPos[i]);
                 let updatedPos = rover.execute(commands[i]);
+                this.store.push(updatedPos);
+                this.grid[updatedPos[0]][updatedPos[1]]=-i-1;
                 this.store.push(updatedPos);
             }
         }
