@@ -1,8 +1,23 @@
 const fs = require('node:fs');
 
 function isValidPosition(position, grid) {
-    const [x, y] = position;
+    const [x, y, direction] = position;
     return x >= 0 && x < grid.length && y >= 0 && y < grid[0].length && grid[x][y] === 0;
+}
+function wrapPosition(resPosition, height, width) {
+    if (resPosition[0] < 0) {
+        resPosition[0] = height - 1;        // height-x(grid.length)
+    }
+    else if (resPosition[0] >= height) {
+        resPosition[0] = 0;
+    }
+    if (resPosition[1] < 0) {
+        resPosition[1] = width - 1;         // width-y(grid[0].length)
+    }
+    else if (resPosition[1] >= width) {
+        resPosition[1] = 0;
+    }
+    return resPosition;
 }
 
 function isTurn(instruction) {
@@ -13,7 +28,26 @@ function isMove(instruction) {
     return instruction === 'F' || instruction === 'B';
 }
 
-
+function triggerMove(instruction,grid,roverPos){
+    let resPos=roverPos;
+    let direction=roverPos[2];
+    if(instruction==='F'){
+        if (direction==='N')resPos[0]++;
+        else if (direction==='S')resPos[0]--;
+        else if (direction==='E')resPos[1]++;
+        else if (direction==='W')resPos[1]--;
+    }
+    else{
+        if (direction==='N')resPos[0]--;
+        else if (direction==='S')resPos[0]++;
+        else if (direction==='E')resPos[1]--;
+        else if (direction==='W')resPos[1]++;
+    }
+    //to validate position and wrap the updated position if needed
+    resPos=wrapPosition(resPos,grid.length,grid[0].length);
+    if(!isValidPosition(resPos,grid)) return roverPos;
+    return resPos;
+}
 
 function triggerTurn(instruction, initialDirection) {
     const directionMap = { 'N': 0, 'E': 1, 'S': 2, 'W': 3 };

@@ -8,23 +8,29 @@ class Rover {
     // inputParser(roverPos) {
     // }
 
-    execute(command) {
+    execute(command,grid) {
         for(let instruction of command){
             
-                        if(this.isMove(instruction)){
-                            this.triggerMove(instruction);
-            
+                        if(isMove(instruction)){
+                            let resPos=triggerMove(instruction,grid,this.roverPos);
+                            if(JSON.stringify(resPos) === JSON.stringify(this.roverPos)){
+                                console.log("Invalid move since obstacle found in the way");
+                                break;
+                            }
+                            this.roverPos=resPos;
                         }
-                        else if(this.isTurn(instruction)){
-                            this.triggerTurn(instruction);
+                        else if(isTurn(instruction)){
+                            
+                            this.roverPos[2]=triggerTurn(instruction,this.roverPos[2]);
             
                         }
                         else{
                             console.error("Error");
                             
                         }
+        }
+        return this.roverPos;
     }
- }
 }
 
 module.exports = Rover;
