@@ -5,7 +5,7 @@ class Plateau {
     constructor(grid, obstacles, count, roverPos, commands) {
         this.grid = Array.from({ length: grid[0] }, () => Array(grid[1]).fill(0));
         this.obstacles = obstacles;
-
+        
         for (let obstacleCoordinate of obstacles) {
             this.grid[obstacleCoordinate[0]][obstacleCoordinate[1]] = 1;
         }
@@ -19,7 +19,6 @@ class Plateau {
                 let updatedPos = rover.execute(commands[i]);
                 this.store.push(updatedPos);
                 this.grid[updatedPos[0]][updatedPos[1]]=-i-1;
-                this.store.push(updatedPos);
             }
         }
 
