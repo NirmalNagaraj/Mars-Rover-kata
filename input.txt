@@ -1,8 +1,11 @@
 5 5
-1
-4 4
 2
+4 4
+2 2
+3
 0 0 N
 FFFFF
-4 4 E
+3 4 E
 LLLLL
+3 3 N
+FFFFF
