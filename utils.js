@@ -70,7 +70,8 @@ function inputParser(inputFilePath){
 
     for(let i = 2 ; i < obstacleCount + 2 ; i++){
         let obstacle = lines[i].split(' ').map((i)=>Number(i));
-        if (obstacle.length !== 2 || isNaN(obstacle[0]) || isNaN(obstacle[1])) {
+
+        if (obstacle.length !== 2 || isNaN(obstacle[0]) || isNaN(obstacle[1]) || obstacle[0]>=grid[0] || obstacle[1] >= grid[1]) {
             throw new Error(`Invalid obstacle at line ${i+1}`);
         }
         obstacles.push(obstacle);
