@@ -155,4 +155,4 @@ function inputParser(inputFilePath){
 }
 
 
-module.exports = { isValidPosition, isMove, isTurn, triggerTurn,inputParser };
+module.exports = { isValidPosition, isMove, isTurn, triggerTurn,inputParser,triggerMove };
