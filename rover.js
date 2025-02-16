@@ -5,8 +5,8 @@ class Rover {
         this.roverPos = roverPos;
     }
 
-    inputParser(roverPos) {
-    }
+    // inputParser(roverPos) {
+    // }
 
     execute(command) {
         for(let instruction of command){
