@@ -1,9 +1,11 @@
 const fs = require('node:fs');
+const directions = ['N', 'E', 'S', 'W'];
 
 function isValidPosition(position, grid) {
     const [x, y, direction] = position;
     return x >= 0 && x < grid.length && y >= 0 && y < grid[0].length && grid[x][y] === 0;
 }
+
 function wrapPosition(resPosition, height, width) {
     if (resPosition[0] < 0) {
         resPosition[0] = height - 1;        // height-x(grid.length)
@@ -29,7 +31,7 @@ function isMove(instruction) {
 }
 
 function triggerMove(instruction,grid,roverPos){
-    let resPos=roverPos;
+    let resPos = [...roverPos]; //let resPos=roverPos; will not work as it will change the original array as well
     let direction=roverPos[2];
     if(instruction==='F'){
         if (direction==='N')resPos[0]++;
@@ -51,7 +53,7 @@ function triggerMove(instruction,grid,roverPos){
 
 function triggerTurn(instruction, initialDirection) {
     const directionMap = { 'N': 0, 'E': 1, 'S': 2, 'W': 3 };
-    const reverseDirectionMap = ['N', 'E', 'S', 'W'];
+    // const reverseDirectionMap = ['N', 'E', 'S', 'W']; //not needed
     if (!isTurn(instruction)) {
         throw new Error("Invalid turn instruction. Must be 'L' or 'R'.");
     }
@@ -61,7 +63,7 @@ function triggerTurn(instruction, initialDirection) {
     // Modulo operation of Turn Algorithm
     direction = (instruction === 'L') ? (direction + 3) % 4 : (direction + 1) % 4;
 
-    return reverseDirectionMap[direction];
+    return directions[direction];
 }
 
 
@@ -126,14 +128,15 @@ function inputParser(inputFilePath){
     for(let i = roverStartIndex ; i < roverEndIndex ; i+=2){
         
         let [x,y,dir] = lines[i].split(' ');
+        dir = dir.replace('\r', ''); // Remove \r from the direction
 
-        if (isNaN(Number(x)) || isNaN(Number(y)) || !["N", "S", "E", "W"].includes(dir)) {
+        if (isNaN(Number(x)) || isNaN(Number(y)) || !directions.includes(dir)) {
             throw new Error(`Invalid rover position at line ${i + 1}`);
         }
 
         roverPos.push([Number(x),Number(y),dir])
 
-        let command = lines[i+1];
+        let command = lines[i+1].replace('\r', ''); // Remove \r from the command
         // console.log(Array.from(command).every((char)=>"LRFB".includes(char)));
        
         if(!Array.from(command).every((char)=>"LRFB".includes(char))){
@@ -153,6 +156,7 @@ function inputParser(inputFilePath){
         return null;
     }
 }
+
 
 
 module.exports = { isValidPosition, isMove, isTurn, triggerTurn,inputParser,triggerMove };

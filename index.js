@@ -21,7 +21,6 @@ if(!parsedInputData){
 let {grid, obstacles, count, roverPos, commands } = parsedInputData
 console.log(grid, obstacles, count, roverPos, commands);
 
+const plateau = new Plateau(grid, obstacles, count, roverPos, commands);
 
-
-
-const plat = new Plateau(grid, obstacles, count, roverPos, commands);
+plateau.displayGrid();
